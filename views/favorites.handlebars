@@ -1,9 +1,109 @@
-<div class="card-group">
+<!--Nav Bar, from Bootstrap-->
+<div id="container">
+  <nav class="navbar navbar-expand-lg navbar-light fixed">
+    <h3 class="navbar-brand" style="color: gray">The Newsroom - Favorites</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="btn btn-link pull-right" style="color: gray" id="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link pull-right" style="color: gray" id="saved">Saved Favorites</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link pull-right" style="color: gray" id="scrape">Click Here for Articles</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+{{!-- cover image --}}
+<img src="assets/img/news_image1.jpg" alt="background_image" style="width: 100%; position: relative">
+<div class="photo_title" 
+style="left: 0;
+    position:absolute;
+    text-align:center;
+    top: 28rem;
+    width: 100%;
+    font-size: 75px;
+    color: white">Favorites
+</div>
+<br>
+<br>
+{{!-- story card from Bootstrap --}}
+<div class="card-deck">
   <div class="card">
-    <img class="card-img-top" src="/assets/img/news_image1.jpg" alt="Card image cap">
+    <div class="form horiz">
+      <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
+        <button class="btn btn-info my-2 my-sm-0 ml-5" class="btn btn-default" data-target="#commentModal" data-toggle="modal"
+          id="commentBtn">Comment on this Story</button>
+        <button class="btn btn-danger my-2 my-sm-0" class="btn btn-default" id="deleteBtn">Delete Story from Favorites</button>
+    </div>
     <div class="card-body">
       <h5 class="card-title">Card title</h5>
       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
     </div>
   </div>
+</div>
+
+{{!-- Comment Modal --}}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" data-keyboard="false" data-backdrop="static" id="commentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" modal-lg role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Comments</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="col-12">
+                <h3>Comments for Article: {{id}}</h3>
+                <br>
+                <form class="signup">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="newUserEmail" placeholder="No comments yet for this story.">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Comment:</label>
+                    <textarea type="text" autocomplete="new-password" class="form-control" id="newUserPassword" placeholder="New Comment"></textarea>
+                </div>
+                <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span> <span class="msg"></span>
+                </div>
+                <button type="submit" class="btn btn-outline-info form-control">Submit Comment</button>
+                  </form>
+                  <br>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Script for Modal --}}
+<script>
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+</script>
