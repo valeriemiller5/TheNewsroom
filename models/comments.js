@@ -1,16 +1,14 @@
 var mongoose = require("mongoose");
+
+// Create the schema for the MongoDB database
 var Schema = mongoose.Schema;
 
-var commentSchema = new Schema({
-    Title: String,
-    Summary: String, 
-    Meta: {
-        Link: String
-    },
-    created_At: Date,
-    updated_At: Date
+// Create the schema model for the database
+var CommentSchema = new Schema({
+    title: String,
+    body: String
 });
 
-var Comments = mongoose.model("News", commentSchema);
+var Comments = mongoose.model("Comments", CommentSchema);
 
 module.exports = Comments;
