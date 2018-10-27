@@ -13,30 +13,35 @@ module.exports = function(app) {
             // results will be saved to the empty object
             var result = {};
             // article information that will be saved in the object
-            result.title = $(element).text();
+            result.title = $(this).text();
             result.summary = $("div.slot-summary").text();
-            result.link = $(element).find("a").attr("href");
+            result.link = $(this).find("a").attr("href");
     
             db.News.create(result).then(function(dbNews) {
+                // log the news stories scrapped from patch.com
                 console.log(dbNews);
-                res.json(dbNews);
             }).catch(function(err) {
-                res.json("An error has occurred: " + err);
+                // if an error returns, display is in the server
+                return res.json(err);
             });
         });
-        res.send("Scrape Complete");
+            // if the scrape is successful, this message is logged
+            res.send("Scrape Complete");
         });
     });
 
     // Open index page, render news articles in Handlebars
     app.get("/", function(req, res) {
-        db.News.find({saved: false}, function (data) {
+        db.News.find({}).then(function (data) {
+            // handlebars object to collect data for the index.handlebars template
             var hbsObject = {
                 news: data
             };
-            console.log(hbsObject);
+            // console.log("htmlroutes, line 36: " + hbsObject);
             res.render("index", hbsObject);
-        });
+        }).catch(function(err) {
+            res.json(err);
+        })
     });
 
     // Open page displaying favorite stories
