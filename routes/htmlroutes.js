@@ -12,9 +12,10 @@ module.exports = function(app) {
         $("h2.slot-title").each(function(i, element) {
             // results will be saved to the empty object
             var result = {};
+            
             // article information that will be saved in the object
             result.title = $(this).text();
-            result.summary = $("div.slot-summary").text();
+            result.summary = $(this).siblings("div").text();
             result.link = $(this).find("a").attr("href");
     
             db.News.create(result).then(function(dbNews) {

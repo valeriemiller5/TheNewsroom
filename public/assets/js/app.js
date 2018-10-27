@@ -1,12 +1,3 @@
-// Grab the articles as a json
-// $.getJSON("/news", function(data) {
-//   // For each one
-//   for (var i = 0; i < data.length; i++) {
-//     // Display the apropos information on the page
-//     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-//   }
-// });
-
 // clicking the "Click Here for Articles" nav button will show the stories retrieved from patch.com
 $(".articles").on("click", function(event) {
     event.preventDefault();
@@ -14,7 +5,7 @@ $(".articles").on("click", function(event) {
         method: "GET",
         url: "/scrape"
       }).then(function(data) {
-        console.log("app.js, line 7: " + data);
+        console.log(data);
         location.reload();
       })
       alert("New Stories Found");
