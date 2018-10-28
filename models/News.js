@@ -1,3 +1,4 @@
+// requires in the mongoose Node package
 var mongoose = require("mongoose");
 
 // Create the schema for the MongoDB database
@@ -17,6 +18,10 @@ var NewsSchema = new Schema({
         type: String,
         required: true
     },
+    saved: {
+        type: Boolean,
+        default: false
+    },
     comments: {
         type: Schema.Types.ObjectId,
         ref: "Comment"
@@ -28,6 +33,8 @@ var NewsSchema = new Schema({
     }
 });
 
+// creates a News model with Mongoose using the NewsSchema
 var News = mongoose.model("News", NewsSchema);
 
+// Exports the model
 module.exports = News;

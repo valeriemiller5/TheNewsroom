@@ -35,43 +35,31 @@ style="left: 0;
 </div>
 <br>
 <br>
+<br>
 {{#if news}}
-  {{#each news}} 
-    {{!-- story card from Bootstrap --}}
-    <div class="card-deck">
-      <div class="card">
-        <div class="form horiz">
-          <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
-            <button data-id="{{_id}}" class="btn btn-info my-2 my-sm-0" class="btn btn-default" style="margin-left: 20%" id="commentBtn">Save as Favorite</button>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{title}}</h5>
-          <p class="card-text">{{summary}}</p>
-          <a class="card-text-link" href="{{link}}">Click Here for Full Story</a>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last Updated: {{updated_At}}</small>
-        </div>
+  {{#each news}}
+    {{#unless this.saved}} 
+      {{!-- story card from Bootstrap --}}
+      <div class="card-deck">
+          <div class="card">
+              <div class="form horiz">
+              <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
+                  <button class="btn btn-default saveBtn" style="margin-left: 20%; background-color: violet; color: white" data-id="{{_id}}">Save as Favorite</button>
+              </div>
+              <div class="card-body">
+              <h5 class="card-title">{{title}}</h5>
+              <p class="card-text">{{summary}}</p>
+              <a class="card-text-link" href="{{link}}">Click Here for Full Story</a>
+              </div>
+              <div class="card-footer">
+              <small class="text-muted">Last Updated: {{updated_At}}</small>
+              </div>
+          </div>
       </div>
-    </div> 
+    {{/unless}}   
   {{/each}}
 {{else}}
-  <h3 style="text-align: center">Please see "Click Here for Articles" to view the latest news.</h3>
+  <h3 style="text-align: center">See "Click Here for Articles" to view the latest news.</h3>
+  <br>
+  <br>
 {{/if}}
-
-{{!-- story card from Bootstrap --}}
-<div class="card-deck">
-  <div class="card">
-    <div class="form horiz">
-      <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
-        <button class="btn btn-info my-2 my-sm-0" class="btn btn-default" style="margin-left: 20%" id="commentBtn">Save as Favorite</button>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-  </div>
-</div>

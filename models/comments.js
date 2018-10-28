@@ -1,3 +1,4 @@
+// require in mongoose Node package
 var mongoose = require("mongoose");
 
 // Create the schema for the MongoDB database
@@ -9,6 +10,8 @@ var CommentSchema = new Schema({
     body: String
 });
 
+// creates a Comments model with Mongoose using the CommentSchema
 var Comments = mongoose.model("Comments", CommentSchema);
 
+// export the model
 module.exports = Comments;
