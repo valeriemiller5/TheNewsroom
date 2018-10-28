@@ -46,7 +46,7 @@ module.exports = function (app) {
     });
 
     // Route for grabbing a specific news article by id, populate it with comments
-    app.get("/news/:id", function (req, res) {
+    app.get("/news/comment/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         db.News.findOne({ _id: req.params.id })
             // ..and populate all of the comments associated with it
@@ -93,6 +93,18 @@ module.exports = function (app) {
         })
     });
 
+    // Route for saving an article to show in the favorites page
+    app.post("/news/delete/:id", function (req, res) {
+        db.News.findOneAndUpdate(
+            {_id: req.params.id}, 
+            { saved: false })
+        .then(function (dbNews) {
+            res.send(dbNews);
+        }).catch(function (err) {
+            res.json(err);
+        })
+    });
+
     // Open page displaying favorite stories
     app.get("/favorites", function (req, res) {
         db.News.find({ saved: true }).then(function (data) {
@@ -106,6 +118,12 @@ module.exports = function (app) {
             res.json(err);
         })
     });
+
+    app.delete("/clear", function(req, res) {
+        db.News.deleteMany({saved: false}, function(err) {
+            res.send(err);
+        })
+    })
 
     // Render 404 page for any unmatched routes
     app.get("*", function (req, res) {

@@ -27,12 +27,43 @@ $(".saveBtn").on("click", function(event) {
     
 
 // When the "Comment on this Story" button is clicked and saved, the comment is saved to the database
-// $().on("click", function(event) {
-//     event.preventDefault();
-//     // Pull up comment form
-//     // Save comments
-//     // Create a div that comments are appended to, so that each comment is seen
-// });
+$(".commentBtn").on("click", function(event) {
+    event.preventDefault();
+    var thisId = $(this).attr("data-id");
+    
+    $.ajax({
+      method: "GET",
+      url: "/news/comment/" + thisId
+    }).then(function(data) {
+      console.log(data);
+      $("#comments").append(data.comments);
+    })
+});
+
+// When "Delete Story from Favorites" button is clicked, news article is removed from favorites
+$(".deleteBtn").on("click", function() {
+  var thisId = $(this).attr("data-id");
+
+  $.ajax({
+    method: "POST",
+    url: "/news/delete/" + thisId
+  }).then(function() {
+    location.reload();
+  })
+  alert("Story has been removed from favorites.");
+})
+
+// Clear all articles from index.handlebars so that new articles can be retrieved
+$(".clear").on("click", function(event) {
+  event.preventDefault();
+    $.ajax({
+      method: "DELETE",
+      url: "/clear"
+    }).then(function() {
+      location.reload();
+    })
+    alert("Stories have been removed.");
+})
 
 // Go to Favorites page
 $(".favorites").on("click", function(event) {
