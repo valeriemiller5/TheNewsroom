@@ -34,10 +34,6 @@ $("#openComment").on("click", function(event) {
     url: "/newsComments/" + thisId
   }).then(function(data) {
     console.log(data);
-    if (data.comments) {
-      $(".comments").val(data.comments.body);
-    }
-    // location.reload();
   })
 })
     

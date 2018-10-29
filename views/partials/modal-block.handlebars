@@ -7,6 +7,9 @@
                 role="dialog">
                 <div class="modal-dialog" modal-lg role="document">
                     <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title">Comments for {{this._id}}</h6>
+                        </div>
                         <div class="modal-body">
                             <div class="col-12">
                                 <h3>Current Comments: </h3>
@@ -14,7 +17,9 @@
                                     {{#if this.comments}}
                                         {{#each this.comments}}
                                         <div class="form-group">
-                                            <p class="comments">{{this.body}}</p>
+                                            <ul>
+                                                <li class="comments">{{this._id}}</li>
+                                            </ul>
                                         </div>
                                         {{/each}}
                                     {{else}}

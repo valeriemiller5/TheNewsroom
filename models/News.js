@@ -22,10 +22,10 @@ var NewsSchema = new Schema({
         type: Boolean,
         default: false
     },
-    comments: {
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comments"
-    },
+    }],
     created_At: Date,
     updated_At: {
         type: Date,

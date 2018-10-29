@@ -52,7 +52,7 @@ module.exports = function (app) {
             // ..and populate all of the comments associated with it
             .populate("comments")
             .then(function (dbNews) {
-                res.json(dbNews);
+                res.render(dbNews);
             })
             .catch(function (err) {
                 res.json(err);
@@ -70,13 +70,11 @@ module.exports = function (app) {
                     { $push: { comments: dbComment._id } },
                     // { new: true } tells the query that we want it to return the updated comment
                     { new: true });
-            })
             // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-            .then(function (dbNews) {
+            }).then(function (dbNews) {
                 res.send(dbNews);
-            })
-            .catch(function (err) {
-                res.json(err);
+            }).catch(function (err) {
+                res.send(err);
             });
     });
 
@@ -88,7 +86,7 @@ module.exports = function (app) {
         .then(function (dbNews) {
             res.send(dbNews);
         }).catch(function (err) {
-            res.json(err);
+            res.send(err);
         })
     });
 
@@ -100,7 +98,7 @@ module.exports = function (app) {
         .then(function (dbNews) {
             res.send(dbNews);
         }).catch(function (err) {
-            res.json(err);
+            res.send(err);
         })
     });
 
