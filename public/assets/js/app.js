@@ -8,7 +8,7 @@ $(".articles").on("click", function(event) {
         console.log(data);
         location.reload();
       })
-      alert("New Stories Found. \nPlease wait while stories load.");
+      alert("New Stories Found. \n\nPlease wait while stories load.");
 });
 
 // When the "Save as Favorite" button is clicked, story is saved on favorites.handlebars
@@ -31,13 +31,13 @@ $("#openComment").on("click", function(event) {
 
   $.ajax({
     method: "GET",
-    url: "/comments/" + thisId
+    url: "/newsComments/" + thisId
   }).then(function(data) {
     console.log(data);
     if (data.comments) {
       $(".comments").val(data.comments.body);
     }
-    location.reload();
+    // location.reload();
   })
 })
     
@@ -49,7 +49,7 @@ $(".commentBtn").on("click", function(event) {
     
     $.ajax({
       method: "POST",
-      url: "/comments/save/" + thisId,
+      url: "/submit/" + thisId,
       data: {
         // value of the text input in the text box of the comments section
         body: $("#newComment" + thisId).val()

@@ -46,7 +46,7 @@ module.exports = function (app) {
     });
 
     // Route for grabbing a specific news article by id, populate it with comments
-    app.get("/comments/:id", function (req, res) {
+    app.get("/newsComments/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         db.News.findOne({ _id: req.params.id })
             // ..and populate all of the comments associated with it
@@ -60,20 +60,20 @@ module.exports = function (app) {
     });
 
     // Route for saving/updating a news article's associated comment
-    app.post("/comments/save/:id", function (req, res) {
+    app.post("/submit/:id", function (req, res) {
         // Create a new comment and pass the req.body to the entry
         db.Comments.create(req.body)
             .then(function (dbComment) {
                 // If a comment was created successfully, find one news article with an `_id` equal to `req.params.id`. Update the news article to be associated with the new comment
                 return db.News.findOneAndUpdate(
                     { _id: req.params.id },
-                    { comments: dbComment._id },
+                    { $push: { comments: dbComment._id } },
                     // { new: true } tells the query that we want it to return the updated comment
                     { new: true });
             })
             // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
             .then(function (dbNews) {
-                res.render(dbNews);
+                res.send(dbNews);
             })
             .catch(function (err) {
                 res.json(err);

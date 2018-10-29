@@ -6,8 +6,11 @@ var Schema = mongoose.Schema;
 
 // Create the schema model for the database
 var CommentSchema = new Schema({
-    title: String,
-    body: String
+    body: String,
+    news: {
+        type: Schema.Types.ObjectId,
+        ref: "News"
+    }
 });
 
 // creates a Comments model with Mongoose using the CommentSchema
