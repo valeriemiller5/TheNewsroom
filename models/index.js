@@ -1,4 +1,4 @@
-// Exports the News and Comments models
+// Exports the News and Comment models
 module.exports = {
     News: require("./News"),
     Comments: require("./Comments")

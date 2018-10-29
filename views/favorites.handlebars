@@ -33,36 +33,28 @@
 <br>
 <br>
 {{#if news}}
-  {{#each news}}
-    {{#if this.saved}}
-      {{!-- story card from Bootstrap --}}
-      <div class="card-deck">
-        <div class="card">
-          <div class="form horiz">
-            <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
-            <button data-id="{{_id}}" class="btn btn-info my-2 my-sm-0 ml-5" class="btn btn-default" data-target="#commentModal" data-toggle="modal"
-              id="commentBtn">Comment on this Story</button>
-            <button data-id="{{_id}}" class="btn btn-danger my-2 my-sm-0 deleteBtn" class="btn btn-default">Delete Story from Favorites</button>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{title}}</h5>
-            <p class="card-text">{{summary}}</p>
-            <a class="card-text-link" href="{{link}}">Click Here for Full Story</a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last Updated: {{updated_At}}</small>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-  {{/each}}
-{{else}}
-<h3 style="text-align: center">You have no saved news stories.</h3>
-<br>
-<br>
-<br>
-{{/if}}
-
+{{#each news}}
+{{#if this.saved}}
+{{!-- story card from Bootstrap --}}
+<div class="card-deck">
+  <div class="card">
+    <div class="form horiz">
+      <img class="card-img-top" src="assets/img/news_image2.jpg" style="width: 300px; height: 180px" alt="Card image cap">
+      <button data-id="{{_id}}" class="btn ml-4" class="btn btn-default" data-target="#commentModal"
+        data-toggle="modal" id="openComment" style="background-color: cyan; color: white">Comment on this Story</button>
+      <button data-id="{{_id}}" class="btn deleteBtn" class="btn btn-default" style="background-color: magenta; color: white">Remove Story from
+        Favorites</button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <p class="card-text">{{summary}}</p>
+      <a class="card-text-link" href="{{link}}">Click Here for Full Story</a>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last Updated: {{updated_At}}</small>
+    </div>
+  </div>
+</div>
 
 {{!-- Comment Modal --}}
 <br>
@@ -70,37 +62,36 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="modal fade" data-keyboard="false" data-backdrop="static" id="commentModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" modal-lg role="document">
+        <div id="newsModal{{this._id}}" class="modal-dialog" modal-lg role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Comments for story {{this._id}}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
             <div class="modal-body">
               <div class="col-12">
-                <h3>Comments for Article: {{id}}</h3>
-                <br>
+                <h3>Current Comments: </h3>
                 <form class="signup">
-                  <div class="form-group">
-                    <div type="text" class="form-control" id="comments" placeholder="No comments yet for this story."></div>
-                  </div>
+                  {{#if this.comments}}
+                    {{#each this.comments}}
+                    <div class="form-group">
+                      <div type="text" class="form-control comments">{{this.body}}</div>
+                      <button data-comments-id="{{this._id}}" data-news-id="{{this.news}}" type="button" class="btn btn-danger deleteComment">Delete</button>
+                    </div>
+                    {{/each}}
+                  {{else}}
+                    <div class="form-group">
+                      <p>No comments have been saved for this story.</p>
+                    </div>
+                  {{/if}}
+                  <br>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Comment:</label>
-                    <textarea type="text" autocomplete="new-password" class="form-control" id="newUserPassword"
-                      placeholder="New Comment"></textarea>
+                    <textarea id="newComment{{this._id}}" type="text" class="form-control" placeholder="New Comment"></textarea>
                   </div>
-                  <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span> <span class="msg"></span>
-                  </div>
-                  <button type="submit" class="btn btn-outline-info form-control commentBtn">Submit Comment</button>
+                  <button data-id="{{_id}}" type="button" class="btn btn-outline-info form-control commentBtn">Save
+                    Comment</button>
                 </form>
                 <br>
               </div>
             </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
             </div>
@@ -110,7 +101,14 @@
     </div>
   </div>
 </div>
-</div>
+{{/if}}
+{{/each}}
+{{else}}
+<h3 style="text-align: center">You have no saved news stories.</h3>
+<br>
+<br>
+<br>
+{{/if}}
 
 {{!-- Script for Modal --}}
 <script>

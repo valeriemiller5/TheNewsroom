@@ -24,7 +24,7 @@ var NewsSchema = new Schema({
     },
     comments: {
         type: Schema.Types.ObjectId,
-        ref: "Comment"
+        ref: "Comments"
     },
     created_At: Date,
     updated_At: {

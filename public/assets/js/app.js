@@ -24,21 +24,43 @@ $(".saveBtn").on("click", function(event) {
   })
   alert("Story has been saved!");
 })
+
+$("#openComment").on("click", function(event) {
+  event.preventDefault();
+  var thisId = $(this).attr("data-id");
+
+  $.ajax({
+    method: "GET",
+    url: "/comments/" + thisId
+  }).then(function(data) {
+    console.log(data);
+    if (data.comments) {
+      $(".comments").val(data.comments.body);
+    }
+    location.reload();
+  })
+})
     
 
-// When the "Comment on this Story" button is clicked and saved, the comment is saved to the database
+// When the "Save Comment" button in the modal is clicked, the comment is saved to the database
 $(".commentBtn").on("click", function(event) {
     event.preventDefault();
     var thisId = $(this).attr("data-id");
     
     $.ajax({
-      method: "GET",
-      url: "/news/comment/" + thisId
+      method: "POST",
+      url: "/comments/save/" + thisId,
+      data: {
+        // value of the text input in the text box of the comments section
+        body: $("#newComment" + thisId).val()
+      }
     }).then(function(data) {
       console.log(data);
-      $("#comments").append(data.comments);
+      location.reload();
     })
 });
+
+
 
 // When "Delete Story from Favorites" button is clicked, news article is removed from favorites
 $(".deleteBtn").on("click", function() {

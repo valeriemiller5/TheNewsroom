@@ -46,13 +46,13 @@ module.exports = function (app) {
     });
 
     // Route for grabbing a specific news article by id, populate it with comments
-    app.get("/news/comment/:id", function (req, res) {
+    app.get("/comments/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         db.News.findOne({ _id: req.params.id })
             // ..and populate all of the comments associated with it
             .populate("comments")
             .then(function (dbNews) {
-                res.json(dbNews);
+                res.render(dbNews);
             })
             .catch(function (err) {
                 res.json(err);
@@ -60,21 +60,20 @@ module.exports = function (app) {
     });
 
     // Route for saving/updating a news article's associated comment
-    app.post("/news/:id", function (req, res) {
+    app.post("/comments/save/:id", function (req, res) {
         // Create a new comment and pass the req.body to the entry
         db.Comments.create(req.body)
             .then(function (dbComment) {
                 // If a comment was created successfully, find one news article with an `_id` equal to `req.params.id`. Update the news article to be associated with the new comment
-
-                // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
                 return db.News.findOneAndUpdate(
                     { _id: req.params.id },
-                    { comment: dbComment._id },
+                    { comments: dbComment._id },
                     // { new: true } tells the query that we want it to return the updated comment
                     { new: true });
             })
+            // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
             .then(function (dbNews) {
-                res.json(dbNews);
+                res.render(dbNews);
             })
             .catch(function (err) {
                 res.json(err);
@@ -93,7 +92,7 @@ module.exports = function (app) {
         })
     });
 
-    // Route for saving an article to show in the favorites page
+    // Route for removing an article from the favorites page
     app.post("/news/delete/:id", function (req, res) {
         db.News.findOneAndUpdate(
             {_id: req.params.id}, 
@@ -119,6 +118,7 @@ module.exports = function (app) {
         })
     });
 
+    // Deletes all unsaved articles from index.handlebars (saved articles will remain on favorites page unless server is reset or it is unfavorited).
     app.delete("/clear", function(req, res) {
         db.News.deleteMany({saved: false}, function(err) {
             res.send(err);
