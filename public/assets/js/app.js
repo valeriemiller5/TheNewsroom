@@ -31,11 +31,11 @@ $("#openComment").on("click", function(event) {
 
   $.ajax({
     method: "GET",
-    url: "/newsComments/" + thisId
+    url: "/newComment/" + thisId
   }).then(function(data) {
     console.log(data);
   })
-})
+});
     
 
 // When the "Save Comment" button in the modal is clicked, the comment is saved to the database
@@ -45,7 +45,7 @@ $(".commentBtn").on("click", function(event) {
     
     $.ajax({
       method: "POST",
-      url: "/submit/" + thisId,
+      url: "/newComment/" + thisId,
       data: {
         // value of the text input in the text box of the comments section
         body: $("#newComment" + thisId).val()

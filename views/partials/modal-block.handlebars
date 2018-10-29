@@ -15,13 +15,14 @@
                                 <h3>Current Comments: </h3>
                                 <form class="signup">
                                     {{#if this.comments}}
-                                        {{#each this.comments}}
                                         <div class="form-group">
                                             <ul>
-                                                <li class="comments">{{this._id}}</li>
+                                            {{#each this.comments}}
+                                            {{!-- the id will render on the webpage, but not the body.  Both are populated in the "news" JSON... --}}
+                                                <li>{{this._id}}, {{this.body}}</li>
+                                            {{/each}}
                                             </ul>
                                         </div>
-                                        {{/each}}
                                     {{else}}
                                         <div class="form-group">
                                             <p>No comments have been saved for this story.</p>
@@ -30,7 +31,7 @@
                                     <br>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Comment:</label>
-                                        <textarea id="newComment{{this._id}}" class="form-control" type="text" name="body" placeholder="Enter Comment Here"></textarea>
+                                        <textarea id="newComment{{this._id}}" class="form-control" type="text" placeholder="Enter Comment Here"></textarea>
                                     </div>
                                     <button data-id="{{this._id}}" type="button" class="btn btn-outline-info form-control commentBtn">Save
                                         Comment

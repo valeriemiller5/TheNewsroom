@@ -45,22 +45,8 @@ module.exports = function (app) {
         })
     });
 
-    // Route for grabbing a specific news article by id, populate it with comments
-    app.get("/newsComments/:id", function (req, res) {
-        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-        db.News.findOne({ _id: req.params.id })
-            // ..and populate all of the comments associated with it
-            .populate("comments")
-            .then(function (dbNews) {
-                res.render(dbNews);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    // Route for saving/updating a news article's associated comment
-    app.post("/submit/:id", function (req, res) {
+        // Route for saving/updating a news article's associated comment
+    app.post("/newComment/:id", function (req, res) {
         // Create a new comment and pass the req.body to the entry
         db.Comments.create(req.body)
             .then(function (dbComment) {
@@ -68,13 +54,28 @@ module.exports = function (app) {
                 return db.News.findOneAndUpdate(
                     { _id: req.params.id },
                     { $push: { comments: dbComment._id } },
+                    // { $push: { comments: dbComment.body } },
                     // { new: true } tells the query that we want it to return the updated comment
                     { new: true });
             // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
             }).then(function (dbNews) {
-                res.send(dbNews);
+                res.json(dbNews);
             }).catch(function (err) {
                 res.send(err);
+            });
+    });
+
+    // Route for grabbing a specific news article by id, populate it with comments
+    app.get("/newComment/:id", function (req, res) {
+        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+        db.News.findOne({ _id: req.params.id })
+            // ..and populate all of the comments associated with it
+            .populate("comments")
+            .then(function (dbNews) {
+                res.json(dbNews);
+            })
+            .catch(function (err) {
+                res.json(err);
             });
     });
 
