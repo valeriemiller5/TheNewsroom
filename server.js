@@ -12,7 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/newsdatabase", { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/newsdatabase", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsdatabase";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Set Handlebars
 var exphbs = require("express-handlebars");
