@@ -26,7 +26,7 @@ $(".saveBtn").on("click", function(event) {
 })
 
 $("#openComment").on("click", function(event) {
-  event.preventDefault();
+  console.log('button is clicked.');
   var thisId = $(this).attr("data-id");
 
   $.ajax({
@@ -59,8 +59,6 @@ $(".commentBtn").on("click", function(event) {
       location.reload();
     })
 });
-
-
 
 // When "Delete Story from Favorites" button is clicked, news article is removed from favorites
 $(".deleteBtn").on("click", function() {

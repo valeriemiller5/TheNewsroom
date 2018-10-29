@@ -12,24 +12,24 @@
                                 <h3>Current Comments: </h3>
                                 <form class="signup">
                                     {{#if this.comments}}
-                                    {{#each this.comments}}
-                                    <div class="form-group">
-                                        <p class="form-control comments">{{this.body}}</p>
-                                    </div>
-                                    {{/each}}
+                                        {{#each this.comments}}
+                                        <div class="form-group">
+                                            <p class="comments">{{this.body}}</p>
+                                        </div>
+                                        {{/each}}
                                     {{else}}
-                                    <div class="form-group">
-                                        <p>No comments have been saved for this story.</p>
-                                    </div>
+                                        <div class="form-group">
+                                            <p>No comments have been saved for this story.</p>
+                                        </div>
                                     {{/if}}
                                     <br>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Comment:</label>
-                                        <textarea id="newComment{{this._id}}" class="form-control" placeholder="Enter Comment Here"></textarea>
+                                        <textarea id="newComment{{this._id}}" class="form-control" type="text" name="body" placeholder="Enter Comment Here"></textarea>
                                     </div>
                                     <button data-id="{{this._id}}" type="button" class="btn btn-outline-info form-control commentBtn">Save
                                         Comment
-                                    </button>
+                                    </button> 
                                 </form>
                                 <br>
                             </div>

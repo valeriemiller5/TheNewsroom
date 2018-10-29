@@ -52,7 +52,7 @@ module.exports = function (app) {
             // ..and populate all of the comments associated with it
             .populate("comments")
             .then(function (dbNews) {
-                res.render(dbNews);
+                res.json(dbNews);
             })
             .catch(function (err) {
                 res.json(err);
