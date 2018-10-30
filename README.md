@@ -6,14 +6,18 @@ Once stories are populated by clicking the "Click Here for Articles" button in t
 
 Users may then click the "Saved Favorites" button in the nav bar to look at the articles they have saved.  Users may then include a comment on the story or remove the story from their favorites.
 
+![Opening Screen Shot](public/assets/img/newsroom_opening.gif)
+
 ## Getting Started
-To visit my site, open the link https://valeriemiller5.github.io/Professional-Portfolio/. Navigation buttons have been added to the top left-hand side of the page.
+To visit my site, open the link https://thenewsroom.herokuapp.com/. Navigation buttons have been added to the top left-hand side of the page.
 
 ## Prerequisites
 Google Chrome is recommended for running this program.  If the user has pulled the app from the GitHub repository, please remember to `npm install` in the terminal before running the app.
 
 ## Challenges
-Getting the comments to render in the modal proved to be an issue.  Though Handlebars can help to simplify getting information from a database, entering the code _exactly_ as it is required was tricky.  Similar issues were found trying to get the news articles to render on the webpage by clicking a button rather than uploading by default upon opening the app.
+Getting the comments to render in the modal proved to be an issue.  Though Handlebars can help to simplify getting information from a database, entering the code _exactly_ as it is required was tricky.  
+
+Similar issues were found trying to get the news articles to render on the webpage by clicking a button rather than uploading by default upon opening the app.
 
 As was a challenge before with previous Handlebars projects, the styling format was strange. Some styling (i.e. webpage background, margins on Bootstrap elements) could be done with the 'style.css' file, however, font styles and colors had to be updated directly in the tag for the line that was being styled.
 
