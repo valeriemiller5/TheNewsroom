@@ -39,7 +39,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/htmlRoutes")(app);
+require("./routes/htmlroutes")(app);
 
 // Start the server
 app.listen(PORT, function() {
