@@ -84,3 +84,13 @@ $(".favorites").on("click", function(event) {
   event.preventDefault();
   window.location.replace("/favorites");
 });
+
+// Function for "Scroll to the Top" button, allows user to click button to go back to the top of the page
+function topFunction() {
+  var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+  if (isSafari) {
+      document.body.scrollTop = 0; // For Safari
+  } else {
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera, etc.
+  }
+}
