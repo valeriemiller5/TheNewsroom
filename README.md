@@ -17,6 +17,15 @@ Google Chrome is recommended for running this program.  If the user has pulled t
 ## Challenges
 Getting the comments to render in the modal proved to be an issue.  Though Handlebars can help to simplify getting information from a database, entering the code _exactly_ as it is required was tricky.  
 
+Comment can be added, but only the ID is rendered:
+![Creating a Comment](public/assets/img/newsroom_comment_demo.gif)
+
+The information is saved correctly in the database:
+![Info Saved in Database](public/assets/img/newsroom_database.gif)
+
+The JSON image of the news article with comment looks correct:
+![Image of JSON Info](public/assets/img/newsroom_json_image.gif)
+
 Similar issues were found trying to get the news articles to render on the webpage by clicking a button rather than uploading by default upon opening the app.
 
 As was a challenge before with previous Handlebars projects, the styling format was strange. Some styling (i.e. webpage background, margins on Bootstrap elements) could be done with the 'style.css' file, however, font styles and colors had to be updated directly in the tag for the line that was being styled.
