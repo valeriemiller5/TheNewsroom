@@ -13,7 +13,6 @@ $(".articles").on("click", function(event) {
 
 // When the "Save as Favorite" button is clicked, story is saved on favorites.handlebars
 $(".saveBtn").on("click", function(event) {
-  console.log('button is clicked');
   var thisId = $(this).attr("data-id");
 
   $.ajax({
@@ -26,7 +25,6 @@ $(".saveBtn").on("click", function(event) {
 })
 
 $("#openComment").on("click", function(event) {
-  console.log('button is clicked.');
   var thisId = $(this).attr("data-id");
 
   $.ajax({
