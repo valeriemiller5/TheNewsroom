@@ -1,9 +1,5 @@
 body {
     background-color: whitesmoke;
-};
-
-.jumbotron {
-    background-color: pink;
 }
 
 img {
@@ -38,3 +34,8 @@ img {
     padding: 15px; 
     border-radius: 10px; 
     font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+}

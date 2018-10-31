@@ -15,11 +15,11 @@
                                 <h3>Current Comments: </h3>
                                 <form class="signup">
                                     {{#if this.comments}}
-                                        <div data-id="{{_id}}" class="form-group">
+                                        <div id="commentDiv" class="form-group">
                                             <ul>
                                             {{#each this.comments}}
                                             {{!-- the id will render on the webpage, but not the body.  Both are populated in the "news" JSON... --}}
-                                                <li>{{this._id}}, {{this.body}}</li>
+                                                <li id="bodyinput{{this._id}}" name="body">{{this.body}}</li>
                                             {{/each}}
                                             </ul>
                                         </div>

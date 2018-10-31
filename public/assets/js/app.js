@@ -32,6 +32,7 @@ $("#openComment").on("click", function(event) {
     url: "/newComment/" + thisId
   }).then(function(data) {
     console.log(data);
+    $("#bodyinput" + thisId).val(data.comments.body);
   })
 });
     

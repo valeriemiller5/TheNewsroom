@@ -105,7 +105,9 @@ module.exports = function (app) {
 
     // Open page displaying favorite stories
     app.get("/favorites", function (req, res) {
-        db.News.find({ saved: true }).then(function (data) {
+        db.News.find({ saved: true })
+        .populate("comments")
+        .then(function (data) {
             // handlebars object to collect data for the index.handlebars template
             var hbsObject = {
                 news: data
