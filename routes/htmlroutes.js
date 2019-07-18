@@ -6,28 +6,33 @@ module.exports = function (app) {
     // Route to scrape the website for news articles, searching for specific info
     app.get("/scrape", function (req, res) {
         // Grab the articles to be rendered from the patch.com website
-        axios.get("https://patch.com/").then(function (response) {
+        axios.get("https://nytimes.com/").then(function (response) {
             var $ = cheerio.load(response.data);
-            // Grab every h2 with a class "slot-title" to get article information
-            $("h2.slot-title").each(function (i, element) {
+            // console.log(response.data);
+            // Grab every div with a class "css-1qiat4j" to get article information
+            $("article.css-8atqhb").each(function (i, element) {
                 // results will be saved to the empty object
                 var result = {};
 
                 // article information that will be saved in the object
-                result.title = $(this).text();
-                result.summary = $(this).siblings("div").text();
+                result.title = $(this).find("h2").text();
+                console.log('This is line 19: ' + result.title);
+                result.summary = $(this).find("li").text();
+                console.log(`this is line 21: ${result.summary}`)
                 result.link = $(this).find("a").attr("href");
+                console.log(`this is line 23: ${result.link}`)
 
-                db.News.create(result).then(function (dbNews) {
+                db.News.create(result)
+                .then(function(dbNews) {
                     // log the news stories scrapped from patch.com
-                    console.log(dbNews);
+                    console.log(`This is line 26: ${dbNews}`);
                 }).catch(function (err) {
                     // if an error returns, display is in the server
                     return res.json(err);
                 });
             });
             // if the scrape is successful, this message is logged
-            res.send("Scrape Complete");
+            res.send("Scrape Complete", result);
         });
     });
 
